@@ -63,7 +63,7 @@ The system has been rigorously tested at various distances (**2m, 3m, 5m**) with
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/YOUR_USERNAME/Autonomous-Balloon-Defense-System.git](https://github.com/YOUR_USERNAME/Autonomous-Balloon-Defense-System.git)
+    git clone [https://github.com/TahaKorkmaz0/Autonomous-Balloon-Defense-System.git](https://github.com/TahaKorkmaz0/Autonomous-Balloon-Defense-System.git)
     ```
 2.  **Install dependencies:**
     ```bash
@@ -75,4 +75,5 @@ The system has been rigorously tested at various distances (**2m, 3m, 5m**) with
     ```
 
 ---
-*Developed by [Your Name] - Mechatronics Engineering Student*
+
+*Developed by Taha Korkmaz - Mechatronics Engineering Student*
