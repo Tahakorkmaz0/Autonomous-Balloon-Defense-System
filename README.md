@@ -1,80 +1,191 @@
-# 🚀 Hybrid-IFF-Targeting-System (Hybrid YOLOv11 + OpenCV)
+# 🏠 House Price Prediction System
 
-![Python](https://img.shields.io/badge/Python-3.9%2B-blue)
-![YOLOv11](https://img.shields.io/badge/AI-YOLOv11-green)
-![OpenCV](https://img.shields.io/badge/Vision-OpenCV-red)
-![CUDA](https://img.shields.io/badge/Hardware-CUDA%20Enabled-purple)
+A Machine Learning application built with PyTorch that predicts house prices based on key property features using a Linear Regression Neural Network.
 
-This project is an autonomous defense system prototype designed to detect, track, and classify moving targets (balloons) in real-time. It utilizes a **Hybrid Architecture** combining Deep Learning for object detection and Computer Vision for logic-based Friend/Foe (IFF) classification.
+## 📋 Features
 
-## 🎯 Project Overview
-The system is built to autonomously distinguish between **"Friendly" (Blue)** and **"Hostile" (Red)** targets within a dynamic environment, simulating a real-world defense scenario.
+- **Interactive Prediction System**: Input house details and get instant price predictions
+- **PyTorch Neural Network**: Implements linear regression using `nn.Module`
+- **Data Normalization**: Uses Z-score standardization for accurate predictions
+- **User-Friendly Interface**: Simple command-line interface with emoji indicators
+- **Error Handling**: Validates user inputs and provides helpful error messages
 
-* **Deep Learning:** Utilizes the state-of-the-art **YOLOv11** model (trained on Google Colab T4 GPU) for high-accuracy object detection.
-* **Computer Vision:** Implements **OpenCV** with HSV color space analysis to eliminate bias and ensure deterministic classification.
-* **Hardware Acceleration:** Optimized for **NVIDIA CUDA** to ensure low-latency performance for tracking moving targets.
+## 🔧 Requirements
+
+- Python 3.14.0 (or compatible version)
+- PyTorch 2.9.1
+- NumPy
+
+## 📦 Installation
+
+1. **Clone or download this repository**
+
+2. **Create a virtual environment** (recommended):
+   ```bash
+   python -m venv .venv
+   ```
+
+3. **Activate the virtual environment**:
+   - Windows:
+     ```bash
+     .venv\Scripts\Activate.ps1
+     ```
+   - Linux/Mac:
+     ```bash
+     source .venv/bin/activate
+     ```
+
+4. **Install required packages**:
+   ```bash
+   py -m pip install torch numpy
+   ```
+
+## 🚀 Usage
+
+Run the program:
+```bash
+python deneme.py
+```
+
+### Input Parameters
+
+The system will ask you to enter the following information:
+
+1. **📐 Square meters (m²)**: Total area of the property
+2. **🚪 Number of rooms**: Count of rooms in the house
+3. **📅 Building age (years)**: How old the building is
+4. **🏢 Floor number**: Which floor the property is on
+
+### Example Session
+
+```
+============================================================
+🏠 HOUSE PRICE PREDICTION SYSTEM 🏠
+============================================================
+
+Please enter house information:
+------------------------------------------------------------
+📐 Square meters (m²): 120
+🚪 Number of rooms: 3
+📅 Building age (years): 5
+🏢 Floor number: 4
+
+============================================================
+📊 PREDICTION RESULT
+============================================================
+🏠 House Details:
+   • Square meters: 120.0 m²
+   • Number of rooms: 3
+   • Building age: 5 years
+   • Floor: 4
+
+💰 Predicted Price: $1,187,234.56
+============================================================
+
+------------------------------------------------------------
+Would you like to predict another house price? (y/n): 
+```
+
+## 🧠 How It Works
+
+### 1. **Data Preparation**
+   - Uses a dataset of 20 sample houses with 4 features each
+   - Features: Square meters, number of rooms, building age, floor number
+   - Normalizes data using Z-score standardization
+
+### 2. **Model Architecture**
+   - Single linear layer neural network
+   - Input: 4 features
+   - Output: 1 predicted price
+   - Mathematical formula: `y = Wx + b`
+
+### 3. **Training Process**
+   - **Loss Function**: Mean Squared Error (MSE)
+   - **Optimizer**: Stochastic Gradient Descent (SGD)
+   - **Learning Rate**: 0.01
+   - **Epochs**: 2000
+   - Final Mean Absolute Error (MAE): ~$7,280
+
+### 4. **Prediction**
+   - Normalizes new input using training statistics
+   - Passes through trained model
+   - Returns predicted price in USD
+
+## 📊 Training Dataset
+
+The model is trained on 20 real estate examples with the following ranges:
+- **Square meters**: 50-160 m²
+- **Rooms**: 1-4
+- **Building age**: 0-25 years
+- **Floor**: 1-10
+- **Prices**: $500,000 - $1,600,000
+
+## 🎯 Model Performance
+
+After 2000 training epochs:
+- **MSE Loss**: ~71,253,872
+- **MAE**: ~$7,280
+- **RMSE**: ~$8,441
+
+*Note: The model's accuracy is limited by the small training dataset (20 samples). For production use, a larger dataset would significantly improve predictions.*
+
+## 🔍 Code Structure
+
+```
+deneme.py
+├── Data Preparation (Lines 1-51)
+│   └── Dataset creation and normalization
+├── Model Architecture (Lines 54-80)
+│   └── HousePricePredictor class (nn.Module)
+├── Training Loop (Lines 98-128)
+│   └── 2000 epochs with progress logging
+├── Helper Function (Lines 136-152)
+│   └── predict_price() for new predictions
+└── User Interface (Lines 154-200)
+    └── Interactive input/output system
+```
+
+## 🛠️ Customization
+
+### Modify Training Parameters
+
+```python
+LEARNING_RATE = 0.01  # Adjust learning speed
+EPOCHS = 2000         # Change number of training iterations
+```
+
+### Add More Features
+
+To include additional features (e.g., number of bathrooms, parking spaces):
+1. Add data to the dataset lists
+2. Update `INPUT_DIM` accordingly
+3. Modify the input normalization and prediction function
+
+### Upgrade to Deep Neural Network
+
+Uncomment lines 71-74 in the code to add hidden layers:
+```python
+self.layer1 = nn.Linear(input_dim, 16)
+self.relu = nn.ReLU()
+self.layer2 = nn.Linear(16, output_dim)
+```
+
+## 📝 License
+
+This project is open source and available for educational purposes.
+
+## 👤 Author
+
+Created as a demonstration of PyTorch fundamentals and Machine Learning workflow.
+
+## 🤝 Contributing
+
+Feel free to fork, modify, and improve this project. Suggestions and pull requests are welcome!
+
+## 📧 Support
+
+If you encounter any issues or have questions, please open an issue in the repository.
 
 ---
 
-## 📉 Dataset Optimization (Engineering Approach)
-During the initial development, a dataset of **7000 images** was tested. However, performance analysis revealed a significant **class imbalance** (too many red balloons), causing the model to be biased towards the "Hostile" class.
-
-To solve this engineering problem, the dataset was optimized down to **1600 task-specific images**. This balanced dataset eliminated the bias and improved the detection accuracy for both classes.
-
-| **Initial Dataset (7000 Images)** | **Optimized Dataset (1600 Images)** |
-|:---------------------------------:|:-----------------------------------:|
-| ![Dataset 7000](assets/dataset7000.png) | ![Dataset 1600](assets/dataset1600.png) |
-| *High Bias & Class Imbalance* | *Balanced & Task-Oriented* |
-
----
-
-## 🛠️ System Architecture & Workflow
-The pipeline processes the camera feed through YOLOv11 to locate targets, crops the Region of Interest (ROI), and applies pixel-based voting algorithms to determine engagement.
-
-![System Flowchart](assets/flowchart.png)
-
-### Core Logic
-1.  **Detection:** YOLOv11 identifies the target (Confidence > 0.5).
-2.  **Focus:** The system crops the bounding box (ROI).
-3.  **Decision (IFF):** Pixel density analysis in HSV color space.
-    * 🔴 **Red Target:** Classified as **HOSTILE** (Engage signal triggered).
-    * 🔵 **Blue Target:** Classified as **FRIENDLY** (Engagement blocked).
-
----
-
-## 📊 Field Test Results (Distance & Dynamics)
-The system has been rigorously tested at various distances (**2m, 3m, 5m**) with moving targets. The hybrid architecture maintained high confidence scores even as the target size decreased.
-
-### Test 1: Close Range (2 Meters)
-**Result:** Immediate lock-on with high confidence (Conf > 0.88).
-![Test 2m](assets/test1.png)
-
-### Test 2: Mid Range (3 Meters)
-**Result:** Stable tracking of moving targets with no frame drops.
-![Test 3m](assets/test2.png)
-
-### Test 3: Long Range (5 Meters)
-**Result:** Successful classification despite smaller pixel area (Conf > 0.78).
-![Test 5m](assets/test3.png)
-
----
-
-## 📂 Installation & Usage
-
-1.  **Clone the repository:**
-    ```bash
-    git clone [https://github.com/TahaKorkmaz0/Hybrid-IFF-Targeting-System.git](https://github.com/TahaKorkmaz0/Hybrid-IFF-Targeting-System.git)
-    ```
-2.  **Install dependencies:**
-    ```bash
-    pip install -r requirements.txt
-    ```
-3.  **Run the system:**
-    ```bash
-    python src/main.py
-    ```
-
----
-
-*Developed by Taha Korkmaz - Mechatronics Engineering Student*
-
+**Happy Predicting! 🎉**
